@@ -1,5 +1,5 @@
 # Environment / secrets — never commit these
-fb.env
+*.env
 
 # Python cache
 __pycache__/
