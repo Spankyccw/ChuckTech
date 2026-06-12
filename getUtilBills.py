@@ -23,7 +23,8 @@ import csv
 import sys
 import datetime
 #Variables
-l_bank_trans_file = "C:\\Users\\chuck\\Documents\\Python\\Data\\bofachkstmt08012022-08232022-edit.csv"
+l_bank_trans_file = "C:\\Users\\chuck\\Documents\\Python\\Data\\bofachkstmt05012023-05232023-edit.csv"
+#l_bank_trans_file = "C:\\Users\\chuck\\Documents\\Python\\Data\\bofachkstmt08012022-08312022-edit.csv"
 #why are some "global" variables accessible in main and others do not appear to be?
 l_water_name = "Water ePays"
 l_water_name = l_water_name.upper()
@@ -76,9 +77,6 @@ def main():
                     l_water_util_amt == line['Amount']
                 if l_test:
                     print("Water", l_water_name, ":", line['Date'],line['Amount'])
- #           else:
- #               l_max_water_date = '?'
- #               l_water_util_amt = 0
 
             #calc most recent elec utility bill amount
             if l_elec_name in line['Description']:
@@ -93,9 +91,6 @@ def main():
                     l_elec_util_amt == line['Amount']
                 if l_test:
                     print("Electricity", l_elec_name,":", line['Date'], line['Amount'])
-#            else:
-#                l_max_elec_date = '?'
-#                l_elec_util_amt = 0
 
             #calc most recent gas utility bill amount
             if l_gas_name in line['Description']:
@@ -110,9 +105,6 @@ def main():
                     l_gas_util_amt == line['Amount']
                 if l_test:
                     print("Natural Gas aka", l_gas_name, ":", line['Date'], line['Amount'])
- #           else:
- #               l_max_gas_date = '?'
- #               l_gas_util_amt = 0
 
             #calc most recent internet access bill amount
             if l_inet_name in line['Description']:
@@ -127,12 +119,9 @@ def main():
                     l_inet_util_amt == line['Amount']
                 if l_test:
                     print("Internet", l_inet_name, ":", line['Date'], line['Amount'])
- #           else:
- #               l_max_inet_date = ''
- #               l_inet_util_amt = 0
 
     print("Summary:")
-    #print(l_max_water_date,l_water_name,l_water_util_amt)
+    print(l_max_water_date,l_water_name,l_water_util_amt)
     print(l_max_elec_date,l_elec_name,l_elec_util_amt)
     print(l_max_gas_date,l_gas_name,l_gas_util_amt)
     print(l_max_inet_date,l_inet_name,l_inet_util_amt)

@@ -1,0 +1,10 @@
+# Environment / secrets — never commit these
+fb.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# VS Code
+.vscode/

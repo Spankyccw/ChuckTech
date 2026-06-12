@@ -37,8 +37,8 @@ def get_env_var(var_name):
     if var_name == "":
         var_name = "NASA_API_KEY"
     my_var = os.getenv(var_name)
-    if l_test:
-        print("Env variable: ",my_var)
+    #if l_test:
+    #    print("Env variable: ",my_var)
     return my_var
 
 def gen_HTML(response):
@@ -46,9 +46,10 @@ def gen_HTML(response):
     fh_html.write("<!DOCTYPE html>\r\n")
     fh_html.write("<html lang=\"en\">\r\n")
     fh_html.write("  <head>\r\n")
-    fh_html.write("    <meta charset=\"UTF-8\">\r\n")
+    #fh_html.write("    <meta charset=\"UTF-8\">\r\n")
     fh_html.write("    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\>\r\n")
-    fh_html.write("    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n")
+    #fh_html.write("    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n")
+    fh_html.write("    <meta http-equiv=\"content-type\" content=\"text-html\" charset=\"utf-8\">\r\n")
     fh_html.write("    <title>APOD</title>\r\n")
     fh_html.write("    <link rel=\"stylesheet\" href=\"style.css\">\r\n")
     fh_html.write("  </head>\r\n")
@@ -69,7 +70,13 @@ def gen_HTML(response):
         apod_copyright = response['copyright']
     except KeyError:
         apod_copyright = ' no copyright'
+    #causing errors in below call
+    #certain charactersets cause errors like for Serbian names with special c character
     fh_html.write("&copy"+apod_copyright+"<p><br>\r\n")
+    #print("test1",apod_copyright)
+    #fh_html.write("test2")
+    #fh_html.write(apod_copyright)
+    #fh_html.write("&copy<p><br>\r\n")
 
     #APOD can be a still image or an animated one so two different HTML tags
     try:
@@ -89,7 +96,10 @@ def gen_HTML(response):
             l_hd_url = 'n/a'
         fh_html.write("<img src="+"\""+str(l_hd_url)+"\"><p><br>")
     
-    apod_descr = response['explanation']
+    try:
+        apod_descr = response['explanation']
+    except KeyError:
+        apod_descr = 'n/a'
     fh_html.write(apod_descr)
     #testing tables
     fh_html.write("    </td>")
@@ -122,7 +132,7 @@ def main():
     #for testing json payload
     #to debug error "KeyError: 'hdurl'"
     if l_test:
-    #    pp.pprint(response)
+        pp.pprint(response)
         try:
             print('HD URL: ',response['hdurl'])
         except KeyError:
